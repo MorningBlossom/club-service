@@ -6,10 +6,11 @@ GOBUILD=$(GOCMD) build
 GOCET=$(GOCMD) test
 GOGET=$(GOCMD) get
 GOFMT=$(GOCMD) fmt
-BINARY_NAME=auth-service
+BINARY_NAME=club-service
 GOLANGCI_LINT=$(shell command -v golangci-lint 2>/dev/null || if [ -n "$$(go env GOBIN)" ]; then printf '%s/golangci-lint' "$$(go env GOBIN)"; else printf '%s/bin/golangci-lint' "$$(go env GOPATH)"; fi)
 
 all: lint test clean
+SHELL := C:/Program Files/Git/bin/bash.exe
 
 lint:
 	@echo "running Lint check"

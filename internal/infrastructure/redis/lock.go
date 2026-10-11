@@ -1,4 +1,3 @@
-
 package redis
 
 import (
@@ -13,7 +12,7 @@ import (
 )
 
 var (
-	ErrInvalidLock = errors.New("invalid lock configuration")
+	ErrInvalidLock  = errors.New("invalid lock configuration")
 	ErrLockNotOwned = errors.New("lock is no longer owned by this token")
 )
 

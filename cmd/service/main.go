@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -19,7 +18,10 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to connect to Redis: %v", err)
 	}
-	defer redisClient.Close()
+	err = redisClient.Close()
+	if err != nil {
+		log.Fatalf("Failed to close Redis connection: %v", err)
+	}
 
 	log.Println("Redis connected successfully")
 
@@ -31,9 +33,9 @@ func main() {
 	}
 
 	log.Println("Redis locker initialized successfully")
-	
+
 	rateLimiter := redis.NewRateLimiter(redisClient.Client)
-	
+
 	// Health check for the API Gateway.
 	http.HandleFunc("/health", handler.HealthCheck)
 
@@ -64,7 +66,7 @@ func main() {
 		w.WriteHeader(http.StatusOK)
 		_, _ = w.Write([]byte("Redis value: " + value))
 	})
-	
+
 	// Test endpoint for the Redis lock.
 	http.HandleFunc("/redis-lock-test", func(w http.ResponseWriter, r *http.Request) {
 		ctx, cancel := context.WithTimeout(r.Context(), 3*time.Second)

@@ -1,4 +1,3 @@
-
 package redis
 
 import (
@@ -43,7 +42,7 @@ func NewClient() (*Client, error) {
 
 	if err := client.Ping(ctx).Err(); err != nil {
 		_ = client.Close()
-		return nil, fmt.Errorf("Redis connection failed: %w", err)
+		return nil, fmt.Errorf("redis connection failed: %w", err)
 	}
 
 	return &Client{

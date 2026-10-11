@@ -1,4 +1,3 @@
-
 package redis
 
 import (
@@ -26,7 +25,7 @@ func (r *RateLimiter) Allow(
 	window time.Duration,
 ) (bool, error) {
 	if r == nil || r.client == nil {
-		return false, fmt.Errorf("Redis client is not initialized")
+		return false, fmt.Errorf("redis client is not initialized")
 	}
 	if key == "" || limit <= 0 || window <= 0 {
 		return false, fmt.Errorf("invalid rate limit configuration")
